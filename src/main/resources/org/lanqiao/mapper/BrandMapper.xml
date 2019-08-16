@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lanqiao.mapper.BrandMapper" >
+  <resultMap id="BrandResultMap" type="org.lanqiao.entity.Brand" >
+    <id column="brand_id" property="brand_id" jdbcType="BIGINT" />
+    <result column="brand_name" property="brand_name" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="org.lanqiao.entity.Brand" extends="BrandResultMap" >
+    <result column="brand_img" property="brand_img" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    brand_id, brand_name
+  </sql>
+  <sql id="Blob_Column_List" >
+    brand_img
+  </sql>
+  <select id="selectByPrimaryKeyBrand" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from brand
+    where brand_id = #{brand_id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKeyBrand" parameterType="java.lang.Long" >
+    delete from brand
+    where brand_id = #{brand_id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insertBrand" parameterType="org.lanqiao.entity.Brand" >
+    insert into brand (brand_id, brand_name, brand_img
+      )
+    values (#{brand_id,jdbcType=BIGINT}, #{brand_name,jdbcType=VARCHAR}, #{brand_img,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelectiveBrand" parameterType="org.lanqiao.entity.Brand" >
+    insert into brand
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="brand_id != null" >
+        brand_id,
+      </if>
+      <if test="brand_name != null" >
+        brand_name,
+      </if>
+      <if test="brand_img != null" >
+        brand_img,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="brand_id != null" >
+        #{brand_id,jdbcType=BIGINT},
+      </if>
+      <if test="brand_name != null" >
+        #{brand_name,jdbcType=VARCHAR},
+      </if>
+      <if test="brand_img != null" >
+        #{brand_img,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelectiveBrand" parameterType="org.lanqiao.entity.Brand" >
+    update brand
+    <set >
+      <if test="brand_name != null" >
+        brand_name = #{brand_name,jdbcType=VARCHAR},
+      </if>
+      <if test="brand_img != null" >
+        brand_img = #{brand_img,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where brand_id = #{brand_id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBsBrand" parameterType="org.lanqiao.entity.Brand" >
+    update brand
+    set brand_name = #{brand_name,jdbcType=VARCHAR},
+      brand_img = #{brand_img,jdbcType=LONGVARCHAR}
+    where brand_id = #{brand_id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyBrand" parameterType="org.lanqiao.entity.Brand" >
+    update brand
+    set brand_name = #{brand_name,jdbcType=VARCHAR}
+    where brand_id = #{brand_id,jdbcType=BIGINT}
+  </update>
+</mapper>

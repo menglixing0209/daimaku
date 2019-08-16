@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lanqiao.mapper.UsersafeMapper" >
+  <resultMap id="UsersafeResultMap" type="org.lanqiao.entity.Usersafe" >
+    <id column="uesr_id" property="uesr_id" jdbcType="BIGINT" />
+    <result column="user_name" property="user_name" jdbcType="VARCHAR" />
+    <result column="user_tel" property="user_tel" jdbcType="VARCHAR" />
+    <result column="user_passwo" property="user_passwo" jdbcType="VARCHAR" />
+    <result column="user_email" property="user_email" jdbcType="VARCHAR" />
+    <result column="user_status" property="user_status" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    uesr_id, user_name, user_tel, user_passwo, user_email, user_status
+  </sql>
+  <select id="selectByPrimaryKeyUsersafe" resultMap="UsersafeResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from usersafe
+    where uesr_id = #{uesr_id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKeyUsersafe" parameterType="java.lang.Long" >
+    delete from usersafe
+    where uesr_id = #{uesr_id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insertUsersafe" parameterType="org.lanqiao.entity.Usersafe" >
+    insert into usersafe (uesr_id, user_name, user_tel, 
+      user_passwo, user_email, user_status
+      )
+    values (#{uesr_id,jdbcType=BIGINT}, #{user_name,jdbcType=VARCHAR}, #{user_tel,jdbcType=VARCHAR}, 
+      #{user_passwo,jdbcType=VARCHAR}, #{user_email,jdbcType=VARCHAR}, #{user_status,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelectiveUsersafe" parameterType="org.lanqiao.entity.Usersafe" >
+    insert into usersafe
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uesr_id != null" >
+        uesr_id,
+      </if>
+      <if test="user_name != null" >
+        user_name,
+      </if>
+      <if test="user_tel != null" >
+        user_tel,
+      </if>
+      <if test="user_passwo != null" >
+        user_passwo,
+      </if>
+      <if test="user_email != null" >
+        user_email,
+      </if>
+      <if test="user_status != null" >
+        user_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uesr_id != null" >
+        #{uesr_id,jdbcType=BIGINT},
+      </if>
+      <if test="user_name != null" >
+        #{user_name,jdbcType=VARCHAR},
+      </if>
+      <if test="user_tel != null" >
+        #{user_tel,jdbcType=VARCHAR},
+      </if>
+      <if test="user_passwo != null" >
+        #{user_passwo,jdbcType=VARCHAR},
+      </if>
+      <if test="user_email != null" >
+        #{user_email,jdbcType=VARCHAR},
+      </if>
+      <if test="user_status != null" >
+        #{user_status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelectiveUsersafe" parameterType="org.lanqiao.entity.Usersafe" >
+    update usersafe
+    <set >
+      <if test="user_name != null" >
+        user_name = #{user_name,jdbcType=VARCHAR},
+      </if>
+      <if test="user_tel != null" >
+        user_tel = #{user_tel,jdbcType=VARCHAR},
+      </if>
+      <if test="user_passwo != null" >
+        user_passwo = #{user_passwo,jdbcType=VARCHAR},
+      </if>
+      <if test="user_email != null" >
+        user_email = #{user_email,jdbcType=VARCHAR},
+      </if>
+      <if test="user_status != null" >
+        user_status = #{user_status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where uesr_id = #{uesr_id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyUsersafe" parameterType="org.lanqiao.entity.Usersafe" >
+    update usersafe
+    set user_name = #{user_name,jdbcType=VARCHAR},
+      user_tel = #{user_tel,jdbcType=VARCHAR},
+      user_passwo = #{user_passwo,jdbcType=VARCHAR},
+      user_email = #{user_email,jdbcType=VARCHAR},
+      user_status = #{user_status,jdbcType=VARCHAR}
+    where uesr_id = #{uesr_id,jdbcType=BIGINT}
+  </update>
+</mapper>

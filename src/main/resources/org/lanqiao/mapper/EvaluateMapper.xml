@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lanqiao.mapper.EvaluateMapper" >
+  <resultMap id="EvaluateResultMap" type="org.lanqiao.entity.Evaluate" >
+    <id column="eva_id" property="eva_id" jdbcType="BIGINT" />
+    <result column="eva_content" property="eva_content" jdbcType="VARCHAR" />
+    <result column="user_id" property="user_id" jdbcType="BIGINT" />
+    <result column="pro_id" property="pro_id" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    eva_id, eva_content, user_id, pro_id
+  </sql>
+  <select id="selectByPrimaryKeyEvaluate" resultMap="EvaluateResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from evaluate
+    where eva_id = #{eva_id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKeyEvaluate" parameterType="java.lang.Long" >
+    delete from evaluate
+    where eva_id = #{eva_id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insertEvaluate" parameterType="org.lanqiao.entity.Evaluate" >
+    insert into evaluate (eva_id, eva_content, user_id, 
+      pro_id)
+    values (#{eva_id,jdbcType=BIGINT}, #{eva_content,jdbcType=VARCHAR}, #{user_id,jdbcType=BIGINT}, 
+      #{pro_id,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelectiveEvaluate" parameterType="org.lanqiao.entity.Evaluate" >
+    insert into evaluate
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="eva_id != null" >
+        eva_id,
+      </if>
+      <if test="eva_content != null" >
+        eva_content,
+      </if>
+      <if test="user_id != null" >
+        user_id,
+      </if>
+      <if test="pro_id != null" >
+        pro_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="eva_id != null" >
+        #{eva_id,jdbcType=BIGINT},
+      </if>
+      <if test="eva_content != null" >
+        #{eva_content,jdbcType=VARCHAR},
+      </if>
+      <if test="user_id != null" >
+        #{user_id,jdbcType=BIGINT},
+      </if>
+      <if test="pro_id != null" >
+        #{pro_id,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelectiveEvaluate" parameterType="org.lanqiao.entity.Evaluate" >
+    update evaluate
+    <set >
+      <if test="eva_content != null" >
+        eva_content = #{eva_content,jdbcType=VARCHAR},
+      </if>
+      <if test="user_id != null" >
+        user_id = #{user_id,jdbcType=BIGINT},
+      </if>
+      <if test="pro_id != null" >
+        pro_id = #{pro_id,jdbcType=BIGINT},
+      </if>
+    </set>
+    where eva_id = #{eva_id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyEvaluate" parameterType="org.lanqiao.entity.Evaluate" >
+    update evaluate
+    set eva_content = #{eva_content,jdbcType=VARCHAR},
+      user_id = #{user_id,jdbcType=BIGINT},
+      pro_id = #{pro_id,jdbcType=BIGINT}
+    where eva_id = #{eva_id,jdbcType=BIGINT}
+  </update>
+</mapper>
