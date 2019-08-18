@@ -5,16 +5,51 @@
     <id column="brand_id" property="brand_id" jdbcType="BIGINT" />
     <result column="brand_name" property="brand_name" jdbcType="VARCHAR" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="org.lanqiao.entity.Brand" extends="BrandResultMap" >
+  <resultMap id="BrandResultMapWithBLOBs" type="org.lanqiao.entity.Brand" extends="BrandResultMap" >
     <result column="brand_img" property="brand_img" jdbcType="LONGVARCHAR" />
   </resultMap>
+<!--  ********************************************************-->
+  <resultMap id="BrandProductResultMap" type="org.lanqiao.entity.Brand" >
+    <id column="brand_id" property="brand_id" jdbcType="BIGINT" />
+    <result column="brand_name" property="brand_name" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="BrandProductResultMapWithBLOBs" type="org.lanqiao.entity.Brand" extends="BrandResultMap" >
+    <result column="brand_img" property="brand_img" jdbcType="LONGVARCHAR" />
+    <collection property="productSet" resultMap="ProductResultMapWithBLOBs" />
+  </resultMap>
+
+  <resultMap id="ProductResultMap" type="org.lanqiao.entity.Product" >
+    <id column="pro_id" property="pro_id" jdbcType="BIGINT" />
+    <result column="pro_name" property="pro_name" jdbcType="VARCHAR" />
+    <result column="pro_weight" property="pro_weight" jdbcType="DOUBLE" />
+    <result column="pro_color" property="pro_color" jdbcType="VARCHAR" />
+    <result column="pro_issued_" property="pro_issued_" jdbcType="DATE" />
+    <result column="pro_price" property="pro_price" jdbcType="DOUBLE" />
+    <result column="pro_product" property="pro_product" jdbcType="DATE" />
+    <result column="pro_describ" property="pro_describ" jdbcType="VARCHAR" />
+    <result column="pro_count" property="pro_count" jdbcType="BIGINT" />
+    <result column="kind_id" property="kind_id" jdbcType="BIGINT" />
+    <result column="brand_id" property="brand_id" jdbcType="BIGINT" />
+  </resultMap>
+  <resultMap id="ProductResultMapWithBLOBs" type="org.lanqiao.entity.Product" extends="ProductResultMap" >
+    <result column="pro_img" property="pro_img" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <!--  ********************************************************-->
   <sql id="Base_Column_List" >
     brand_id, brand_name
   </sql>
   <sql id="Blob_Column_List" >
     brand_img
   </sql>
-  <select id="selectByPrimaryKeyBrand" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+
+  <select id="select_Brand_Product" resultMap="BrandProductResultMapWithBLOBs" parameterType="java.lang.Long">
+    select b.*,p.* from brand b,product p where b.brand_id = p.brand_id and b.brand_id = #{brand_id}
+  </select>
+  <select id="selectAllBrand" resultType="org.lanqiao.entity.Brand">
+    select * from brand
+  </select>
+
+  <select id="selectByPrimaryKeyBrand" resultMap="BrandResultMapWithBLOBs" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     ,

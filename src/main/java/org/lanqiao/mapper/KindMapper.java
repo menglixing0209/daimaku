@@ -3,6 +3,8 @@ package org.lanqiao.mapper;
 import org.lanqiao.entity.Kind;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface KindMapper {
     int deleteByPrimaryKeyKind(Long kind_id);
@@ -16,4 +18,12 @@ public interface KindMapper {
     int updateByPrimaryKeySelectiveKind(Kind record);
 
     int updateByPrimaryKeyKind(Kind record);
+
+    /***********************************************************************************/
+
+    List<Kind> selectAllKind();
+
+    Kind select_Kind_Product(Long kind_id);
+
+    /***********************************************************************************/
 }

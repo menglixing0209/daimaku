@@ -2,6 +2,8 @@ package org.lanqiao.service;
 
 import org.lanqiao.entity.*;
 
+import java.util.List;
+
 public interface MyService {
    /******************************************************************/
 
@@ -78,4 +80,16 @@ public interface MyService {
     int updateByPrimaryKeyUsersafe(Usersafe record);
 
     /******************************************************************/
+    List<Kind> selectAllKind();
+    List<Brand> selectAllBrand();
+    List<Product> selectAllProduct();
+    List<Evaluate> selectAllEvaluate();
+    List<Usersafe> selectAllUsersafe();
+
+    Kind select_Kind_Product(Long kind_id);
+    Brand select_Brand_Product(Long brand_id);
+    List<Product> selectAllProductKBE();
+ /******************************************************************/
+   int countAllEvaluate();
+ /******************************************************************/
 }

@@ -6,6 +6,8 @@
     <link href="css/DisplayPage.css" rel="stylesheet">
     <link href="css/Base.css" rel="stylesheet">
 </head>
+<script src="js/vue.js"></script>
+<script src="js/jquery-3.4.1.js"></script>
 <body>
 
 <!-------------------------------------------------top1----------------------------------------------->
@@ -55,7 +57,7 @@
         <i>搜索</i>
     </div>
     <div id="top23">
-        <a>我的购物车</a>
+        <a href="cart.html">我的购物车</a>
         <i class="i1"></i>
         <i class="i2"></i>
     </div>
@@ -105,23 +107,9 @@
         <div class="shell">
             <div class="list1"><strong>品牌</strong></div>
             <div class="list2">
-                <ul>
-                    <a class="aElem1"></a>
-                    <a class="aElem1"></a>
-                    <a class="aElem1"></a>
-                    <a class="aElem1"></a>
-                    <a class="aElem1"></a>
-                    <a class="aElem1"></a>
-                    <a class="aElem1"></a>
-                    <a class="aElem1"></a>
-                    <a class="aElem1"></a>
-                    <a class="aElem1"></a>
-                    <a class="aElem1"></a>
-                    <a class="aElem1"></a>
-                    <a class="aElem1"></a>
-                    <a class="aElem1"></a>
-                    <a class="aElem1"></a>
-                    <a class="aElem1"></a>
+                <ul id="vue_brandname">
+                    <a class="aElem1" v-for="(brand,index) in brands">{{brand.name}}</a>
+<!--                    <a class="aElem1">品牌</a>-->
                 </ul>
             </div>
         </div>
@@ -142,14 +130,10 @@
         <div class="shell">
             <div class="list1"><span>类型：</span></div>
             <div class="list2">
-                <ul>
-                    <a class="aElem2">键盘配件</a>
-                    <a class="aElem2">键鼠套装</a>
-                    <a class="aElem2">薄膜键盘</a>
-                    <a class="aElem2">静电容键盘</a>
-                    <a class="aElem2">个性定制键盘</a>
-                    <a class="aElem2">机械键盘</a>
-                    <a class="aElem2">超薄键盘</a>
+
+                <ul id="vue_kindname">
+                    <li name="kindtype" class="aElem2" v-for="(kind,index) in kinds">{{kind.name}}</li>
+<!--                    <a class="aElem2">键鼠套装</a>-->
                 </ul>
             </div>
         </div>
@@ -218,50 +202,163 @@
             </div>
         </div>
         <div id="subject_window_meun">
-            <div class="subject_window_meun_merchandise">
+            <div class="subject_window_meun_merchandise" v-for="(product,index) in products">
                 <a class="subject_window_meun_merchandise_a">
                     <img src="images/hudie.jpg" class="subject_window_meun_merchandise_a_img">
-                    <span class="subject_window_meun_merchandise_a_price">￥2000</span>
-                    <p class="subject_window_meun_merchandise_a_describe">功夫功夫更好地叽叽咕咕好好过功夫功夫更好地叽叽咕咕好好过功夫功夫更好地叽叽咕咕好好过</p>
-                    <span class="subject_window_meun_merchandise_a_evaluateCount">评论：1000+</span>
-                    <span class="subject_window_meun_merchandise_a_shop">商店名</span>
-                    <div class="subject_window_meun_merchandise_a_optate"></div>
-                </a>
-            </div>
-            <div class="subject_window_meun_merchandise">
-                <a class="subject_window_meun_merchandise_a">
-                    <img src="images/hudie.jpg" class="subject_window_meun_merchandise_a_img">
-                    <span class="subject_window_meun_merchandise_a_price">￥4000</span>
-                    <p class="subject_window_meun_merchandise_a_describe">功夫功夫更好地叽叽咕咕好好过功夫功夫更好地叽叽咕咕好好过功夫功夫更好地叽叽咕咕好好过</p>
-                    <span class="subject_window_meun_merchandise_a_evaluateCount">评论：5000+</span>
-                    <span class="subject_window_meun_merchandise_a_shop">商店名</span>
-                    <div class="subject_window_meun_merchandise_a_optate"></div>
-                </a>
-            </div>
-            <div class="subject_window_meun_merchandise">
-                <a class="subject_window_meun_merchandise_a">
-                    <img src="images/hudie.jpg" class="subject_window_meun_merchandise_a_img">
-                    <span class="subject_window_meun_merchandise_a_price">￥6000</span>
-                    <p class="subject_window_meun_merchandise_a_describe">功夫功夫更好地叽叽咕咕好好过功夫功夫更好地叽叽咕咕好好过功夫功夫更好地叽叽咕咕好好过</p>
-                    <span class="subject_window_meun_merchandise_a_evaluateCount">评论：6000+</span>
-                    <span class="subject_window_meun_merchandise_a_shop">商店名</span>
-                    <div class="subject_window_meun_merchandise_a_optate"></div>
-                </a>
-            </div>
-            <div class="subject_window_meun_merchandise">
-                <a class="subject_window_meun_merchandise_a">
-                    <img src="images/hudie.jpg" class="subject_window_meun_merchandise_a_img">
-                    <span class="subject_window_meun_merchandise_a_price">￥8000</span>
-                    <p class="subject_window_meun_merchandise_a_describe">功夫功夫更好地叽叽咕咕好好过功夫功夫更好地叽叽咕咕好好过功夫功夫更好地叽叽咕咕好好过</p>
-                    <span class="subject_window_meun_merchandise_a_evaluateCount">评论：8000+</span>
-                    <span class="subject_window_meun_merchandise_a_shop">商店名</span>
-                    <div class="subject_window_meun_merchandise_a_optate"></div>
+                    <span class="subject_window_meun_merchandise_a_proid">{{product.proid}}</span>
+                    <span class="subject_window_meun_merchandise_a_price">￥{{product.pri}}</span>
+                    <p class="subject_window_meun_merchandise_a_describe">{{product.des}}</p>
+                    <span class="subject_window_meun_merchandise_a_evaluateCount">评论：{{product.eva}}+</span>
+                    <span class="subject_window_meun_merchandise_a_brand">品牌:{{product.brand}}</span>
+                    <span class="subject_window_meun_merchandise_a_shop">商品:{{product.name}}</span>
+                    <span class="subject_window_meun_merchandise_a_kind">种类:{{product.kind}}</span>
+                    <div class="subject_window_meun_merchandise_a_optate">
+                        <button class="subject_window_meun_merchandise_a_optate_button1" name="立即购买">立即购买</button>
+                        <button class="subject_window_meun_merchandise_a_optate_button2" name="加入购物车">加入购物车</button>
+                    </div>
                 </a>
             </div>
         </div>
     </div>
 
 </div>
-
 </body>
+
+<script>
+    var vuebrandname = new Vue({
+        el:"#vue_brandname",
+        data:{
+            newbrand:{
+                name:""
+            },
+            brands:[{
+                name:"京东商城"
+            },{
+                name:"淘宝商城"
+            },{
+                name:"天猫商城"
+            },{
+                name:""
+            },{
+                name:""
+            },{
+                name:""
+            },{
+                name:""
+            },{
+                name:""
+            },{
+                name:""
+            },{
+                name:""
+            },{
+                name:""
+            },{
+                name:""
+            },{
+                name:""
+            },{
+                name:""
+            },{
+                name:""
+            },{
+                name:""
+            },],
+        }
+    });
+    var vuekindname = new Vue({
+        el:"#vue_kindname",
+        data:{
+            kinds:[],
+        }
+    });
+    var vueproduct = new Vue({
+        el:"#subject_window_meun",
+        data:{
+            products:[],
+        }
+    });
+    $(function () {
+        $.ajax({
+            url:"http://localhost:8080/getallbrand",
+            type:"post",
+            // data:{"pageNum":pageNum,"pageSize":pageSize},
+            dataType:"json",
+            success:function (data) {
+                var $elem=$("#vue_brandname").children();
+                var min =$elem.length < data.length ? $elem.length : data.length;
+                for(var i=0;i<min;i++){
+                    vuebrandname.brands[i].name = data[i].brand_name;
+                }
+            }
+        });
+        $.ajax({
+            url:"http://localhost:8080/getallkind",
+            type:"post",
+            // data:{"pageNum":pageNum,"pageSize":pageSize},
+            dataType:"json",
+            success:function (data) {
+                for(var i=0;i<data.length;i++){
+                    vuekindname.kinds.push({name:data[i].kind_name});
+                }
+            }
+        });
+        $.ajax({
+            // url:"http://localhost:8080/getallproduct",
+            url:"http://localhost:8080/selectgetproductkbe",
+            type:"post",
+            // data:{"pageNum":pageNum,"pageSize":pageSize},
+            dataType:"json",
+            success:function (data) {
+                for(var i=0;i<data.length;i++){
+                    vueproduct.products.push({pri : data[i].pro_price , des : data[i].pro_describ,name:data[i].pro_name,eva:data[i].evaluateSet.length,brand:data[i].brand.brand_name,kind:data[i].kind.kind_name,proid:data[i].pro_id});
+                }
+            }
+        });
+        $("#vue_kindname").on("click",".aElem2",function () {
+            var t="种类:"+$(this).text();
+            var arry = $("#subject_window_meun").children();
+            for(var i = 0 ;i<arry.length;i++){
+                arry.eq(i).show();
+            }
+            for(var i = 0 ;i<arry.length;i++){
+                if(arry.eq(i).find(".subject_window_meun_merchandise_a_kind").text()!=t){
+                    arry.eq(i).hide();
+                }
+            }
+        });
+        $("#vue_brandname").on('click','.aElem1',function () {
+            var t="品牌:"+$(this).text();
+            var arry = $("#subject_window_meun").children();
+            for(var i = 0 ;i<arry.length;i++){
+                arry.eq(i).show();
+            }
+            for(var i = 0 ;i<arry.length;i++){
+                if(arry.eq(i).find(".subject_window_meun_merchandise_a_brand").text()!=t){
+                    arry.eq(i).hide();
+                }
+            }
+        });
+
+
+        $("#subject_window_meun").on("click",".subject_window_meun_merchandise_a_img",function () {
+            $.post("http://localhost:8080/getPro",{
+                pro_id:parseInt($(this).next().text()),
+            });
+        });
+        $("#subject_window_meun").on("click",".subject_window_meun_merchandise_a_optate_button1",function () {
+            var arry = $(this).parent().children();
+            $.post("http://localhost:8080/",{
+                pro_id:parseInt(arry.eq(1).text()),
+            });
+        })
+        $("#subject_window_meun").on("click",".subject_window_meun_merchandise_a_optate_button2",function () {
+            var arry = $(this).parent().children();
+            $.post("http://localhost:8080/",{
+                pro_id:parseInt(arry.eq(1).text()),
+            });
+        })
+
+    })
+</script>
 </html>

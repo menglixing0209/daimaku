@@ -10,6 +10,12 @@
   <sql id="Base_Column_List" >
     eva_id, eva_content, user_id, pro_id
   </sql>
+  <select id="selectAllEvaluate" resultType="org.lanqiao.entity.Evaluate">
+    select * from evaluate
+  </select>
+  <select id="countAllEvaluate" resultType="java.lang.Integer">
+    select count(*) from evaluate
+  </select>
   <select id="selectByPrimaryKeyEvaluate" resultMap="EvaluateResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />

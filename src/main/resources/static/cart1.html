@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div, ul, li {
+            margin: 0;
+            padding: 0
+        }
+
+        li {
+            float: left;
+            width: 100px;
+            height: 24px;
+            line-height: 24px;
+            list-style: none;
+            border: solid 1px;
+            text-align: center;
+        }
+
+        #cart {
+            width: 700px;
+            text-align: center;
+        }
+
+        .num input {
+            width: 30px;
+            text-align: center;
+        }
+
+        ul{
+            background-color: cornflowerblue;
+
+        }
+
+        /*ul:nth-child(0) {*/
+        /*background-color: aqua;*/
+        /*}*/
+
+        .num {
+            width: 150px;
+        }
+
+        #total {
+            clear: both;
+            text-align: right;
+            padding-right: 50px;
+            padding-top: 5px;
+        }
+
+        #total span {
+            color: red
+        }
+    </style>
+</head>
+<body>
+<input type="date">
+<div id="cart">
+    <ul>
+        <li><input name="all" type="checkbox">全选</li>
+        <li>产品名称</li>
+        <li>价格</li>
+        <li class="num">数量</li>
+        <li>合计</li>
+        <li>操作</li>
+    </ul>
+    <ul v-for="(produce,index) in produces">
+        <li><input name="one" type="checkbox"></li>
+        <li>{{produce.name}}</li>
+        <li>{{produce.price}}</li>
+        <li class="num"><input type="button" value="-" @click="changeSub(index)"> <input name="num" type="text" v-model="produce.num"> <input type="button" value="+" @click="changeAdd(index)">
+        </li>
+        <li>{{hj(index)}}</li>
+        <li><span @click="del(index)">删除</span></li>
+    </ul>
+    <div id="total">总价:<span>0.00</span></div>
+    <input name="add" @click="add" type="button" value="添加">
+</div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+    var pro = ["电脑","u盘","充电器","鼠标"];
+    var price = [10000,23,45,65];
+    var mv=new Vue({
+        el:"#cart",
+        data:{
+            produces:[{
+                name:"gfgfgf",
+                price:1000,
+                num:1,
+
+            },{
+                name:"gfffggf",
+                price:10000,
+                num:1,
+            }],
+        },
+        methods:{
+            hj:function (i) {
+                return this.produces[i].price*this.produces[i].num;
+            },
+            zj:function () {
+                var  total=0;
+                for(var j=0;j<this.produces.length;j++){
+                    total+=this.produces[j].price*this.produces[j].num;
+                }
+                return total;
+            },
+            add:function () {
+                var i=Math.floor(Math.random()*4);
+                var flag=-1;
+                for(var j=0;j<this.produces.length;j++){
+                    if(this.produces[j].name==pro[i]){
+                        flag=j;
+                        break;
+                    }
+                }
+                if(flag==-1){
+                    this.produces.push({name:pro[i],price:price[i],num:1});
+                }else {
+                    this.produces[flag].num++;
+                }
+            },
+            del:function (index) {
+                this.produces.splice(index,1);
+            },
+            changeAdd:function (index) {
+                this.produces[index].num++;
+            },
+            changeSub:function (index) {
+                this.produces[index].num--;
+            }
+        }
+    });
+</script>
+</html>

@@ -5,6 +5,8 @@ import org.lanqiao.mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MyServiceImp implements MyService {
 
@@ -190,4 +192,54 @@ public class MyServiceImp implements MyService {
     }
 
     /******************************************************************/
+    @Override
+    public List<Kind> selectAllKind() {
+        List<Kind> list=kindMapper.selectAllKind();
+        return list;
+    }
+
+    @Override
+    public List<Brand> selectAllBrand() {
+        return brandMapper.selectAllBrand();
+    }
+
+    @Override
+    public List<Product> selectAllProduct() {
+        List<Product> list=productMapper.selectAllProduct();
+        return list;
+    }
+
+    @Override
+    public List<Evaluate> selectAllEvaluate() {
+        return evaluateMapper.selectAllEvaluate();
+    }
+
+    @Override
+    public List<Usersafe> selectAllUsersafe() {
+        return usersafeMapper.selectAllUsersafe();
+    }
+
+    @Override
+    public Kind select_Kind_Product(Long kind_id) {
+        return kindMapper.select_Kind_Product(kind_id);
+    }
+
+    @Override
+    public Brand select_Brand_Product(Long brand_id) {
+        return brandMapper.select_Brand_Product(brand_id);
+    }
+
+    @Override
+    public List<Product> selectAllProductKBE() {
+        return productMapper.selectAllProductKBE();
+    }
+
+    /******************************************************************/
+    @Override
+    public int countAllEvaluate() {
+        return evaluateMapper.countAllEvaluate();
+    }
+
+    /******************************************************************/
+
 }

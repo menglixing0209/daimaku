@@ -3,6 +3,8 @@ package org.lanqiao.mapper;
 import org.lanqiao.entity.Evaluate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface EvaluateMapper {
     int deleteByPrimaryKeyEvaluate(Long eva_id);
@@ -16,4 +18,8 @@ public interface EvaluateMapper {
     int updateByPrimaryKeySelectiveEvaluate(Evaluate record);
 
     int updateByPrimaryKeyEvaluate(Evaluate record);
+
+    List<Evaluate> selectAllEvaluate();
+
+    int countAllEvaluate();
 }

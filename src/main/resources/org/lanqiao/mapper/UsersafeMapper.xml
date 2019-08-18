@@ -12,6 +12,9 @@
   <sql id="Base_Column_List" >
     uesr_id, user_name, user_tel, user_passwo, user_email, user_status
   </sql>
+  <select id="selectAllUsersafe" resultType="org.lanqiao.entity.Usersafe">
+    select * from usersafe
+  </select>
   <select id="selectByPrimaryKeyUsersafe" resultMap="UsersafeResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
